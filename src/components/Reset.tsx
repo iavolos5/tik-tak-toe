@@ -1,14 +1,11 @@
-import { GameStates } from '../constants'
+import { memo } from 'react'
 
 interface ResetProps {
   gameState: number
   onReset: () => void
 }
 
-const Reset = ({ gameState, onReset }: ResetProps) => {
-  if (gameState === GameStates.inProgress) {
-    return
-  }
+const Reset = ({ onReset }: ResetProps) => {
   return (
     <button onClick={onReset} className='reset-button'>
       Reset
@@ -16,4 +13,4 @@ const Reset = ({ gameState, onReset }: ResetProps) => {
   )
 }
 
-export default Reset
+export default memo(Reset)
