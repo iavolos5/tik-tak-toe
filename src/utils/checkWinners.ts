@@ -1,7 +1,7 @@
 import { GameStates, PLAYER_X, winningCombinations } from '../constants'
 
 interface CheckWinner {
-  setStrikeClass: React.Dispatch<React.SetStateAction<undefined | string>>
+  setStrikeClass: React.Dispatch<React.SetStateAction<string>>
   setGameState: React.Dispatch<React.SetStateAction<number>>
   tiles: Array<string | null>
 }

@@ -1,13 +1,13 @@
-import { memo } from "react"
+import { memo } from 'react'
 
 interface StrikeProps {
   strikeClass: undefined | string
 }
 
-const Strike = memo(({ strikeClass }: StrikeProps) => {
-  console.log('12312312');
-  
-  return <div className={`strike ${strikeClass}`}></div>
-})
+const Strike = ({ strikeClass }: StrikeProps) => {
+  console.log('12312312')
 
-export default Strike
+  return <div className={`strike ${strikeClass}`}></div>
+}
+
+export default memo(Strike)

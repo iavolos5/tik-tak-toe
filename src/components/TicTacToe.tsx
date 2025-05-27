@@ -12,10 +12,12 @@ gameOverSound.volume = 0.2
 const clickSound = new Audio(clickSoundAsset)
 clickSound.volume = 0.5
 
+type PlayerTurn = 'X' | 'O'
+
 const TicTacToe = () => {
   const [tiles, setTiles] = useState(Array(9).fill(null))
-  const [playerTurn, setPlayerTurn] = useState(PLAYER_X)
-  const [strikeClass, setStrikeClass] = useState<string | undefined>()
+  const [playerTurn, setPlayerTurn] = useState<PlayerTurn>(PLAYER_X)
+  const [strikeClass, setStrikeClass] = useState<string>('')
   const [gameState, setGameState] = useState(GameStates.inProgress)
 
   useEffect(() => {
@@ -36,7 +38,7 @@ const TicTacToe = () => {
 
   const handleReset = () => {
     setGameState(GameStates.inProgress)
-    setStrikeClass(undefined)
+    setStrikeClass('')
     setPlayerTurn(PLAYER_X)
     setTiles(Array(9).fill(null))
   }
@@ -65,8 +67,14 @@ const TicTacToe = () => {
         onTileClick={handleTileClick}
         strikeClass={strikeClass}
       />
-      <GameOver gameState={gameState} />
-      <Reset gameState={gameState} onReset={handleReset} />
+      {gameState === GameStates.inProgress ? (
+        <></>
+      ) : (
+        <>
+          <GameOver gameState={gameState} />
+          <Reset gameState={gameState} onReset={handleReset} />
+        </>
+      )}
     </div>
   )
 }
