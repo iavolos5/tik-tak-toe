@@ -2,16 +2,12 @@ interface TileProps {
   className?: string
   value: null | string
   onClick: () => void
-  playerTurn: string
+  hoverClass: string
   key: number
 }
 
-const Tile = ({ className, value, onClick, playerTurn }: TileProps) => {
+const Tile = ({ className, value, onClick, hoverClass }: TileProps) => {
   console.log(value)
-  let hoverClass = null
-  if (value === null && playerTurn !== null) {
-    hoverClass = `${playerTurn.toLowerCase()}-hover`
-  }
 
   return (
     <div onClick={onClick} className={`tile ${hoverClass} ${className || ''}`}>

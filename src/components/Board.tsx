@@ -18,20 +18,26 @@ const Board = ({ tiles, onTileClick, playerTurn, strikeClass }: BoardProps) => {
     }`
   }, [])
 
+  // таблица делается один раз и не трогается, так что можно и индексы вставить
+  const tileComponents = tiles.map((value, index) => {
+    let hoverClass = ''
+    if (value === null && playerTurn !== null) {
+      hoverClass = `${playerTurn.toLowerCase()}-hover`
+    }
+    return (
+      <Tile
+        key={index}
+        hoverClass={hoverClass}
+        onClick={() => onTileClick(index)}
+        value={value}
+        className={getClassName(index)}
+      />
+    )
+  })
+
   return (
     <div className='board'>
-      {tiles.map((value, index) => {
-        return (
-          <Tile
-            key={index}
-            playerTurn={playerTurn}
-            onClick={() => onTileClick(index)}
-            value={value}
-            className={getClassName(index)}
-          />
-        )
-      })}
-
+      {tileComponents}
       <Strike strikeClass={strikeClass} />
     </div>
   )
