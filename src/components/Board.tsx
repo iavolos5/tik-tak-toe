@@ -5,7 +5,7 @@ interface BoardProps {
   tiles: Array<string | null>
   onTileClick: (index: number) => void
   playerTurn: string
-  strikeClass: undefined | string
+  strikeClass: string
 }
 
 const Board = ({ tiles, onTileClick, playerTurn, strikeClass }: BoardProps) => {
