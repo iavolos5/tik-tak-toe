@@ -1,10 +1,3 @@
-export const GameStates = {
-  playerXWins: 0,
-  playerOWins: 1,
-  draw: 2,
-  inProgress: 3
-}
-
 export const PLAYER_X = 'X'
 export const PLAYER_O = 'O'
 

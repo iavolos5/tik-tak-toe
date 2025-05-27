@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react'
 import Board from './Board'
 import { checkWinner } from '../utils/checkWinners'
 import GameOver from './GameOver'
-import { GameStates, PLAYER_O, PLAYER_X } from '../constants'
+import { PLAYER_O, PLAYER_X } from '../constants'
 import Reset from './Reset'
 import gameOverSoundAsset from '../sounds/EndGameSound.wav'
 import clickSoundAsset from '../sounds/ClickSound.wav'
+import { GameStates } from '../interfaces'
 
 const gameOverSound = new Audio(gameOverSoundAsset)
 gameOverSound.volume = 0.2
@@ -18,7 +19,7 @@ const TicTacToe = () => {
   const [tiles, setTiles] = useState(Array(9).fill(null))
   const [playerTurn, setPlayerTurn] = useState<PlayerTurn>(PLAYER_X)
   const [strikeClass, setStrikeClass] = useState<string>('')
-  const [gameState, setGameState] = useState(GameStates.inProgress)
+  const [gameState, setGameState] = useState(GameStates.InProgress)
 
   useEffect(() => {
     checkWinner({ tiles, setStrikeClass, setGameState })
@@ -31,20 +32,20 @@ const TicTacToe = () => {
   }, [tiles])
 
   useEffect(() => {
-    if (gameState !== GameStates.inProgress) {
+    if (gameState !== GameStates.InProgress) {
       gameOverSound.play()
     }
   }, [gameState])
 
   const handleReset = () => {
-    setGameState(GameStates.inProgress)
+    setGameState(GameStates.InProgress)
     setStrikeClass('')
     setPlayerTurn(PLAYER_X)
     setTiles(Array(9).fill(null))
   }
 
   const handleTileClick = (index: number) => {
-    if (tiles[index] !== null || gameState !== GameStates.inProgress) {
+    if (tiles[index] !== null || gameState !== GameStates.InProgress) {
       return
     }
     const newTiles = [...tiles]
@@ -67,7 +68,7 @@ const TicTacToe = () => {
         onTileClick={handleTileClick}
         strikeClass={strikeClass}
       />
-      {gameState === GameStates.inProgress ? (
+      {gameState === GameStates.InProgress ? (
         <></>
       ) : (
         <>

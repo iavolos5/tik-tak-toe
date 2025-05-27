@@ -1,4 +1,5 @@
-import { GameStates, PLAYER_X, winningCombinations } from '../constants'
+import { PLAYER_X, winningCombinations } from '../constants'
+import { GameStates } from '../interfaces'
 
 interface CheckWinner {
   setStrikeClass: React.Dispatch<React.SetStateAction<string>>
@@ -11,6 +12,13 @@ export function checkWinner({
   setStrikeClass,
   setGameState
 }: CheckWinner) {
+  const areAllTilesFilledIn = tiles.every((tile) => tile !== null)
+
+  if (areAllTilesFilledIn) {
+    setGameState(GameStates.Draw)
+    return
+  }
+
   for (const { combo, strikeClass } of winningCombinations) {
     const tileValue1 = tiles[combo[0]]
     const tileValue2 = tiles[combo[1]]
@@ -23,17 +31,11 @@ export function checkWinner({
     ) {
       setStrikeClass(strikeClass)
       if (tileValue1 === PLAYER_X) {
-        setGameState(GameStates.playerXWins)
+        setGameState(GameStates.PlayerXWins)
       } else {
-        setGameState(GameStates.playerOWins)
+        setGameState(GameStates.PlayerOWins)
       }
       return
     }
-  }
-
-  const areAllTilesFilledIn = tiles.every((tile) => tile !== null)
-
-  if (areAllTilesFilledIn) {
-    setGameState(GameStates.draw)
   }
 }

@@ -1,20 +1,18 @@
-import { GameStates } from '../constants'
+import { GameStates } from '../interfaces'
 
 interface GameOverProps {
   gameState: number
 }
 
 const GameOver = ({ gameState }: GameOverProps) => {
-  console.log('gameState')
-
   switch (gameState) {
-    case GameStates.inProgress:
+    case GameStates.InProgress:
       return <></>
-    case GameStates.playerOWins:
+    case GameStates.PlayerOWins:
       return <div className='game-over'>O Wins</div>
-    case GameStates.playerXWins:
+    case GameStates.PlayerXWins:
       return <div className='game-over'>X Wins</div>
-    case GameStates.draw:
+    case GameStates.Draw:
       return <div className='game-over'>draw</div>
     default:
       ;<></>
