@@ -8,15 +8,17 @@ import gameOverSoundAsset from '../sounds/EndGameSound.wav'
 import clickSoundAsset from '../sounds/ClickSound.wav'
 import { GameStates } from '../interfaces'
 
+type PlayerTurn = 'X' | 'O'
+
 const gameOverSound = new Audio(gameOverSoundAsset)
 gameOverSound.volume = 0.2
 const clickSound = new Audio(clickSoundAsset)
 clickSound.volume = 0.5
 
-type PlayerTurn = 'X' | 'O'
-
 const TicTacToe = () => {
-  const [tiles, setTiles] = useState(Array(9).fill(null))
+  const [tiles, setTiles] = useState<Array<PlayerTurn | null>>(
+    Array(9).fill(null)
+  )
   const [playerTurn, setPlayerTurn] = useState<PlayerTurn>(PLAYER_X)
   const [strikeClass, setStrikeClass] = useState<string>('')
   const [gameState, setGameState] = useState(GameStates.InProgress)
